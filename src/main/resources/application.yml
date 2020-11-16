@@ -1,2 +1,13 @@
-server.port=8081
+server:
+  port: 8080
+
+spring:
+  datasource:
+    initialization-mode: always
+    platform: postgresql
+
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/library
+    username: postgres
+    password: Crcb1290
 
