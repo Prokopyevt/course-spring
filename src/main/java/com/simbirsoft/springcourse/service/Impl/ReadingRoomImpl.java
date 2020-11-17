@@ -6,38 +6,53 @@ import com.simbirsoft.springcourse.repository.ReadingRoomRepository;
 import com.simbirsoft.springcourse.service.LibraryService;
 import com.simbirsoft.springcourse.service.ReaderService;
 import com.simbirsoft.springcourse.service.ReadingRoomService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import static org.springframework.util.StringUtils.isEmpty;
 
 @Service
 public class ReadingRoomImpl implements ReadingRoomService {
 
-    @Autowired
-    private ReadingRoomRepository readingRoomRepository;
 
-    @Autowired
-    private LibraryService libraryService;
+    private final ReadingRoomRepository readingRoomRepository;
+    private final LibraryService libraryService;
+    private final ReaderService readerService;
 
-    @Autowired
-    private ReaderService readerService;
+
+    public ReadingRoomImpl(ReadingRoomRepository readingRoomRepository, LibraryService libraryService, ReaderService readerService) {
+        this.readingRoomRepository = readingRoomRepository;
+        this.libraryService = libraryService;
+        this.readerService = readerService;
+    }
+
 
     @Override
-    public ReadingRoom getById(Long id) {
-        return  readingRoomRepository.findById(id).orElse(null);
+    public ReadingRoom getById(Long id)  {
+        if(isEmpty(id)) {
+            throw new NullPointerException("Пусто");
+        }
+        ReadingRoom readingRoom = readingRoomRepository.findById(id).orElse(null);
+        if(isEmpty(readingRoom)){
+            throw new NullPointerException("Пусто");
+        }
+             return  readingRoom;
     }
 
     @Override
-    public void save(ReadingRoomDto readingRoomDto) {
+    public ReadingRoom save(ReadingRoomDto readingRoomDto) {
+        if(isEmpty(readingRoomDto)){
+            throw new NullPointerException("Пусто");
+        }
         ReadingRoom readingRoom = new ReadingRoom();
         readingRoom.setLibrary(libraryService.getById(readingRoomDto.getLibraryId()));
         readingRoom.setReader(readerService.getById(readingRoomDto.getReaderId()));
         readingRoom.setResidueReader(readingRoomDto.getResidueReader());
-
-        readingRoomRepository.save(readingRoom);
+            return readingRoomRepository.save(readingRoom);
     }
 
     @Override
     public void delete(Long id) {
-
+        readingRoomRepository.delete(getById(id));
     }
 }
