@@ -1,6 +1,7 @@
 package com.simbirsoft.springcourse.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Reader")
@@ -14,7 +15,7 @@ public class Reader {
     private String name;
 
     @Column(name = "dateOfBirth")
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 
     public Long getId() {
         return id;
@@ -32,11 +33,11 @@ public class Reader {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 }

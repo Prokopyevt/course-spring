@@ -4,30 +4,46 @@ import com.simbirsoft.springcourse.dto.ReaderDto;
 import com.simbirsoft.springcourse.model.Reader;
 import com.simbirsoft.springcourse.repository.ReaderRepository;
 import com.simbirsoft.springcourse.service.ReaderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static org.springframework.util.StringUtils.isEmpty;
 
 @Service
 public class ReaderServiceImpl implements ReaderService {
 
-    @Autowired
-    private ReaderRepository readerRepository;
+
+    private final ReaderRepository readerRepository;
+
+    public ReaderServiceImpl(ReaderRepository readerRepository) {
+        this.readerRepository = readerRepository;
+    }
 
     @Override
     public Reader getById(Long id) {
-        return readerRepository.findById(id).orElse(null);
+        if (isEmpty(id)) {
+            throw new NullPointerException("Пусто");
+        }
+            Reader reader = readerRepository.findById(id).orElse(null);
+            if (isEmpty(reader)) {
+                throw new NullPointerException("Пусто");
+            }
+            return reader;
+        }
+
+        @Override
+        public Reader save (ReaderDto readerDto){
+            if (isEmpty(readerDto)) {
+                throw new NullPointerException("Пусто");
+            }
+            Reader reader = new Reader();
+            reader.setName(readerDto.getName());
+            reader.setDateOfBirth(readerDto.getDateOfBirth());
+        return   readerRepository.save(reader);
+        }
+
+        @Override
+        public void delete (Long id){
+            readerRepository.deleteById(id);
+        }
     }
 
-    @Override
-    public void save(ReaderDto readerDto) {
-    Reader reader = new Reader();
-    reader.setName(readerDto.getName());
-    reader.setDateOfBirth(readerDto.getDateOfBirth());
-    readerRepository.save(reader);
-    }
-
-    @Override
-    public void delete(Long id) {
-    readerRepository.deleteById(id);
-    }
-}
