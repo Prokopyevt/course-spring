@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
 @RequestMapping("/api/v1/readingRoom")
 public class ReadingRoomController {
@@ -20,18 +19,18 @@ public class ReadingRoomController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReadingRoom> getById(@PathVariable("id") Long id){
+    public ResponseEntity<ReadingRoom> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(readingRoomService.getById(id));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ReadingRoom> addReadingRoom(@RequestBody ReadingRoomDto readingRoomDto ){
+    public ResponseEntity<ReadingRoom> addReadingRoom(@RequestBody ReadingRoomDto readingRoomDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(readingRoomService.save(readingRoomDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
-         readingRoomService.delete(id);
-             return ResponseEntity.ok().build();
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        readingRoomService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

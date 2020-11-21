@@ -6,7 +6,7 @@ import com.simbirsoft.springcourse.service.ReaderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
 @RestController
@@ -21,18 +21,18 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reader> getById(@PathVariable("id") Long id){
+    public ResponseEntity<Reader> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(readerService.getById(id));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Reader> addReader( @RequestBody ReaderDto readerDto ){
+    public ResponseEntity<Reader> addReader(@RequestBody ReaderDto readerDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(readerService.save(readerDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         readerService.delete(id);
-            return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 }

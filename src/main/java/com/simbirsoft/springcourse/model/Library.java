@@ -3,25 +3,25 @@ package com.simbirsoft.springcourse.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Library")
+@Table(name = "library")
 public class Library {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name ="nameBook")
-    private  String nameBook;
+    @Column(name = "name_book")
+    private String nameBook;
 
-    @Column(name ="author")
-    private  String author;
+    @Column(name = "author")
+    private String author;
 
-    @Column(name ="yearOfPublishing")
-    private  Integer yearOfPublishing;
+    @Column(name = "year_of_publishing")
+    private Integer yearOfPublishing;
 
-    @Column(name ="status")
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private  Status status;
+    private Status status;
 
     public Long getId() {
         return id;

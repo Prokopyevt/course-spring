@@ -14,7 +14,7 @@ public class Reader {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "dateOfBirth")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
     public Long getId() {

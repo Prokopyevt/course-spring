@@ -4,9 +4,9 @@ import com.simbirsoft.springcourse.model.Status;
 
 public class LibraryDto {
 
-    private  String nameBook;
-    private  String author;
-    private  Integer yearOfPublishing;
+    private String nameBook;
+    private String author;
+    private Integer yearOfPublishing;
     private Status status;
 
     public String getNameBook() {

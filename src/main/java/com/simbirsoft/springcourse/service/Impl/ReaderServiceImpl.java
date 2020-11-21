@@ -21,29 +21,29 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public Reader getById(Long id) {
         if (isEmpty(id)) {
-            throw new NullPointerException("Пусто");
+            throw new NullPointerException("ID не найден");
         }
-            Reader reader = readerRepository.findById(id).orElse(null);
-            if (isEmpty(reader)) {
-                throw new NullPointerException("Пусто");
-            }
-            return reader;
+        Reader reader = readerRepository.findById(id).orElse(null);
+        if (isEmpty(reader)) {
+            throw new NullPointerException("Читатель не найден");
         }
-
-        @Override
-        public Reader save (ReaderDto readerDto){
-            if (isEmpty(readerDto)) {
-                throw new NullPointerException("Пусто");
-            }
-            Reader reader = new Reader();
-            reader.setName(readerDto.getName());
-            reader.setDateOfBirth(readerDto.getDateOfBirth());
-        return   readerRepository.save(reader);
-        }
-
-        @Override
-        public void delete (Long id){
-            readerRepository.deleteById(id);
-        }
+        return reader;
     }
+
+    @Override
+    public Reader save(ReaderDto readerDto) {
+        if (isEmpty(readerDto)) {
+            throw new NullPointerException("Пустое значение");
+        }
+        Reader reader = new Reader();
+        reader.setName(readerDto.getName());
+        reader.setDateOfBirth(readerDto.getDateOfBirth());
+        return readerRepository.save(reader);
+    }
+
+    @Override
+    public void delete(Long id) {
+        readerRepository.deleteById(id);
+    }
+}
 
