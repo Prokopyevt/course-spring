@@ -9,7 +9,7 @@ public class ReadingRoomDto {
     private Long readerId;
     private Integer residueReader;
 
-    public  Long getLibraryId() {
+    public Long getLibraryId() {
         return libraryId;
     }
 

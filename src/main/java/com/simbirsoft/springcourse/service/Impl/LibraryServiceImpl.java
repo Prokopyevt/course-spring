@@ -4,6 +4,7 @@ import com.simbirsoft.springcourse.dto.LibraryDto;
 import com.simbirsoft.springcourse.model.Library;
 import com.simbirsoft.springcourse.repository.LibraryRepository;
 import com.simbirsoft.springcourse.service.LibraryService;
+import com.simbirsoft.springcourse.service.MistakesController.ThereIsNoSuchUserException;
 import org.springframework.stereotype.Service;
 
 import static org.springframework.util.StringUtils.isEmpty;
@@ -21,11 +22,11 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public Library getById(Long id) {
         if (isEmpty(id)) {
-            throw new NullPointerException("Пусто");
+            throw new NullPointerException("ID не найден");
         }
         Library library = libraryRepository.findById(id).orElse(null);
         if (isEmpty(library)) {
-            throw new NullPointerException("Пусто");
+            throw new ThereIsNoSuchUserException("Библиотека не найдена");
         }
         return library;
     }
@@ -33,14 +34,14 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public Library save(LibraryDto libraryDto) {
         if (isEmpty(libraryDto)) {
-            throw new NullPointerException("Пусто");
+            throw new NullPointerException("Пустое значение");
         }
         Library library = new Library();
         library.setNameBook(libraryDto.getNameBook());
         library.setAuthor(libraryDto.getAuthor());
         library.setYearOfPublishing(libraryDto.getYearOfPublishing());
         library.setStatus(libraryDto.getStatus());
-            return libraryRepository.save(library);
+        return libraryRepository.save(library);
     }
 
     @Override

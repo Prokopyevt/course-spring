@@ -12,35 +12,29 @@ import static org.springframework.util.StringUtils.isEmpty;
 
 @RestController
 @RequestMapping("/api/v1/library")
-public  class LibraryController {
+public class LibraryController {
 
 
-    private final  LibraryService  libraryService;
+    private final LibraryService libraryService;
 
     public LibraryController(LibraryService libraryService) {
         this.libraryService = libraryService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Library> getById(@PathVariable("id") Long id){
+    public ResponseEntity<Library> getById(@PathVariable("id") Long id) {
+
         return ResponseEntity.ok(libraryService.getById(id));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Library> addLibrary( @RequestBody LibraryDto libraryDto ){
+    public ResponseEntity<Library> addLibrary(@RequestBody LibraryDto libraryDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(libraryService.save(libraryDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
-        if (isEmpty(id)) {
-            return ResponseEntity.badRequest().build();
-    }
-        Library library = libraryService.getById(id);
-        if(isEmpty(library)) {
-            return  ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         libraryService.delete(id);
-            return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 }

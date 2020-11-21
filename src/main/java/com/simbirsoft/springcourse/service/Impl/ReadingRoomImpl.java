@@ -26,29 +26,28 @@ public class ReadingRoomImpl implements ReadingRoomService {
         this.readerService = readerService;
     }
 
-
     @Override
-    public ReadingRoom getById(Long id)  {
-        if(isEmpty(id)) {
-            throw new NullPointerException("Пусто");
+    public ReadingRoom getById(Long id) {
+        if (isEmpty(id)) {
+            throw new NullPointerException("ID не найден");
         }
         ReadingRoom readingRoom = readingRoomRepository.findById(id).orElse(null);
-        if(isEmpty(readingRoom)){
-            throw new NullPointerException("Пусто");
+        if (isEmpty(readingRoom)) {
+            throw new NullPointerException("Контент отсутствует");
         }
-             return  readingRoom;
+        return readingRoom;
     }
 
     @Override
     public ReadingRoom save(ReadingRoomDto readingRoomDto) {
-        if(isEmpty(readingRoomDto)){
-            throw new NullPointerException("Пусто");
+        if (isEmpty(readingRoomDto)) {
+            throw new NullPointerException("Пустое значение");
         }
         ReadingRoom readingRoom = new ReadingRoom();
         readingRoom.setLibrary(libraryService.getById(readingRoomDto.getLibraryId()));
         readingRoom.setReader(readerService.getById(readingRoomDto.getReaderId()));
         readingRoom.setResidueReader(readingRoomDto.getResidueReader());
-            return readingRoomRepository.save(readingRoom);
+        return readingRoomRepository.save(readingRoom);
     }
 
     @Override
