@@ -18,19 +18,19 @@ public class ReadingRoomController {
     public ReadingRoomController(ReadingRoomService readingRoomService) {
         this.readingRoomService = readingRoomService;
     }
-    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('READINGROOM_READ')")
     @GetMapping("/{id}")
     public ResponseEntity<ReadingRoom> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(readingRoomService.getById(id));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('READINGROOM_WRITE')")
     @PostMapping("/create")
     public ResponseEntity<ReadingRoom> addReadingRoom(@RequestBody ReadingRoomDto readingRoomDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(readingRoomService.save(readingRoomDto));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('READINGROOM_WRITE')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         readingRoomService.delete(id);

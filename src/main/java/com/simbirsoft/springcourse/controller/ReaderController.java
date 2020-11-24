@@ -21,19 +21,19 @@ public class ReaderController {
         this.readerService = readerService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('READER_READ')")
     @GetMapping("/{id}")
     public ResponseEntity<Reader> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(readerService.getById(id));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('READER_WRITE')")
     @PostMapping("/create")
     public ResponseEntity<Reader> addReader(@RequestBody ReaderDto readerDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(readerService.save(readerDto));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('READER_WRITE')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         readerService.delete(id);

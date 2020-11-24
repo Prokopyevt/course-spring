@@ -22,19 +22,19 @@ public class LibraryController {
         this.libraryService = libraryService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('LIBRARY_READ,')")
     @GetMapping("/{id}")
     public ResponseEntity<Library> getById(@PathVariable("id") Long id) {
 
         return ResponseEntity.ok(libraryService.getById(id));
     }
-   @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('LIBRARY_WRITE')")
     @PostMapping("/create")
     public ResponseEntity<Library> addLibrary(@RequestBody LibraryDto libraryDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(libraryService.save(libraryDto));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('LIBRARY_WRITE')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         libraryService.delete(id);

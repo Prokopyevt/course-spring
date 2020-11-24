@@ -14,7 +14,8 @@ public class UserDto implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities().stream().map(authority -> new SimpleGrantedAuthority(authority.getName().toString())).collect(Collectors.toList());
+        return user.getAuthorities().stream().flatMap(authority -> authority.getPermission().stream()).map(permission ->
+                new SimpleGrantedAuthority(permission.getName().toString())).collect(Collectors.toSet());
     }
 
     @Override
