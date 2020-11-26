@@ -1,8 +1,5 @@
 package com.simbirsoft.springcourse.dto;
 
-import com.simbirsoft.springcourse.model.Library;
-import com.simbirsoft.springcourse.model.Reader;
-
 public class ReadingRoomDto {
 
     private Long libraryId;
