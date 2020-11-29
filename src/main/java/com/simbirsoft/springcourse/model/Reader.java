@@ -1,9 +1,13 @@
 package com.simbirsoft.springcourse.model;
 
+import jdk.jfr.DataAmount;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Data
 @Table(name = "Reader")
 public class Reader {
 
@@ -16,28 +20,4 @@ public class Reader {
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 }

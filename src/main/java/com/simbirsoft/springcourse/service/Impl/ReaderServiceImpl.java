@@ -1,22 +1,21 @@
 package com.simbirsoft.springcourse.service.Impl;
 
 import com.simbirsoft.springcourse.dto.ReaderDto;
+import com.simbirsoft.springcourse.mapper.ReaderMapper;
 import com.simbirsoft.springcourse.model.Reader;
 import com.simbirsoft.springcourse.repository.ReaderRepository;
 import com.simbirsoft.springcourse.service.ReaderService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import static org.springframework.util.StringUtils.isEmpty;
 
 @Service
+@AllArgsConstructor
 public class ReaderServiceImpl implements ReaderService {
 
-
+    private ReaderMapper readerMapper;
     private final ReaderRepository readerRepository;
-
-    public ReaderServiceImpl(ReaderRepository readerRepository) {
-        this.readerRepository = readerRepository;
-    }
 
     @Override
     public Reader getById(Long id) {
@@ -32,13 +31,10 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public Reader save(ReaderDto readerDto) {
-        if (isEmpty(readerDto)) {
-            throw new NullPointerException("Пустое значение");
-        }
-        Reader reader = new Reader();
-        reader.setName(readerDto.getName());
-        reader.setDateOfBirth(readerDto.getDateOfBirth());
-        return readerRepository.save(reader);
+      //  if (isEmpty(readerDto)) {
+        //    throw new NullPointerException("Пустое значение");
+       // }
+        return readerRepository.save(readerMapper.toReader(readerDto));
     }
 
     @Override
