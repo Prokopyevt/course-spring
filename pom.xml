@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<version>1.4.1.Final</version>
 	</properties>
 
 	<dependencies>
@@ -131,7 +132,6 @@
 						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
-							<version>1.4.1.Final</version>
 						</path>
 						<!-- other annotation processors -->
 					</annotationProcessorPaths>

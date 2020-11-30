@@ -17,7 +17,7 @@ import static org.springframework.util.StringUtils.isEmpty;
 @AllArgsConstructor
 public class LibraryServiceImpl implements LibraryService {
 
-    private LibraryMapper libraryMapper;
+    private final LibraryMapper libraryMapper;
     private final LibraryRepository libraryRepository;
 
     @Override

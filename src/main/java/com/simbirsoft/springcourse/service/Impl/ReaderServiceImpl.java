@@ -5,6 +5,7 @@ import com.simbirsoft.springcourse.mapper.ReaderMapper;
 import com.simbirsoft.springcourse.model.Reader;
 import com.simbirsoft.springcourse.repository.ReaderRepository;
 import com.simbirsoft.springcourse.service.ReaderService;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import static org.springframework.util.StringUtils.isEmpty;
 @AllArgsConstructor
 public class ReaderServiceImpl implements ReaderService {
 
-    private ReaderMapper readerMapper;
+    private final ReaderMapper readerMapper;
     private final ReaderRepository readerRepository;
 
     @Override
@@ -31,9 +32,9 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public Reader save(ReaderDto readerDto) {
-      //  if (isEmpty(readerDto)) {
-        //    throw new NullPointerException("Пустое значение");
-       // }
+         if (isEmpty(readerDto)) {
+             throw new NullPointerException("Пустое значение");
+        }
         return readerRepository.save(readerMapper.toReader(readerDto));
     }
 

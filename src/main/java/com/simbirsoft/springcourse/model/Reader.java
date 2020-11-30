@@ -1,5 +1,6 @@
 package com.simbirsoft.springcourse.model;
 
+import io.swagger.annotations.ApiParam;
 import jdk.jfr.DataAmount;
 import lombok.Data;
 
@@ -15,9 +16,11 @@ public class Reader {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ApiParam(required = true, value = "Имя читателя")
     @Column(name = "name")
     private String name;
 
+    @ApiParam(required = true, value = "Дата рождения")
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 }

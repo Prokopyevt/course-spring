@@ -22,7 +22,7 @@ public class ReadingRoomImpl implements ReadingRoomService {
     private final ReadingRoomRepository readingRoomRepository;
     private final LibraryService libraryService;
     private final ReaderService readerService;
-    private ReadingRoomMapper readingRoomMapper;
+    private final ReadingRoomMapper readingRoomMapper;
 
     @Override
     public ReadingRoom getById(Long id) {
