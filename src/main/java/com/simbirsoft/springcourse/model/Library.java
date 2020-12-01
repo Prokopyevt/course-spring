@@ -1,5 +1,7 @@
 package com.simbirsoft.springcourse.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
 
@@ -14,19 +16,19 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ApiParam(required = true, value = "Название книги")
+    @ApiModelProperty(required = true, value = "Название книги", example = "Герой нашего времени")
     @Column(name = "name_book")
     private String nameBook;
 
-    @ApiParam(required = true, value = "Автор")
+    @ApiModelProperty(required = true, value = "Автор", example = "М.Ю.Лермонтов")
     @Column(name = "author")
     private String author;
 
-    @ApiParam(required = true, value = "Год издания")
+    @ApiModelProperty(required = true, value = "Год издания", example = "1839")
     @Column(name = "year_of_publishing")
     private Integer yearOfPublishing;
 
-    @ApiParam(required = true, value = "Статус")
+    @ApiModelProperty(required = true, value = "Статус",example = "OPEN")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
