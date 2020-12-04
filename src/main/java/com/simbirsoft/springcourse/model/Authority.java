@@ -1,9 +1,12 @@
 package com.simbirsoft.springcourse.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "authority")
 public class Authority {
@@ -22,35 +25,6 @@ public class Authority {
 
     public Authority() {
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Set<Permission> getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Set<Permission> permission) {
-        this.permission = permission;
-    }
-
-    public Authority(AuthorityType name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public AuthorityType getName() {
-        return name;
-    }
-
-    public void setName(AuthorityType name) {
-        this.name = name;
-    }
-
 }
 
 

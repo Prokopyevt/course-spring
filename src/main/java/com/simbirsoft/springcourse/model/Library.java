@@ -1,8 +1,14 @@
 package com.simbirsoft.springcourse.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "library")
 public class Library {
 
@@ -10,56 +16,20 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ApiModelProperty(required = true, value = "Название книги", example = "Герой нашего времени")
     @Column(name = "name_book")
     private String nameBook;
 
+    @ApiModelProperty(required = true, value = "Автор", example = "М.Ю.Лермонтов")
     @Column(name = "author")
     private String author;
 
+    @ApiModelProperty(required = true, value = "Год издания", example = "1839")
     @Column(name = "year_of_publishing")
     private Integer yearOfPublishing;
 
+    @ApiModelProperty(required = true, value = "Статус",example = "OPEN")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNameBook() {
-        return nameBook;
-    }
-
-    public void setNameBook(String nameBook) {
-        this.nameBook = nameBook;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public Integer getYearOfPublishing() {
-        return yearOfPublishing;
-    }
-
-    public void setYearOfPublishing(Integer yearOfPublishing) {
-        this.yearOfPublishing = yearOfPublishing;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }
